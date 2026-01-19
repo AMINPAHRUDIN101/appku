@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aplikasi Android Pertama</title>
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+    transition: background 0.3s, color 0.3s;
+  }
+
+  /* Splash Screen */
+  #splash {
+    position: fixed;
+    top:0; left:0; right:0; bottom:0;
+    background: linear-gradient(135deg,#2196f3,#64b5f6);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 28px;
+    z-index: 9999;
+    transition: opacity 0.5s;
+  }
+
+  #app {
+    display: none;
+    max-width: 360px;
+    margin: auto;
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.5s;
+  }
+
+  header {
+    background: #2196f3;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    font-size: 24px;
+    border-radius: 8px 8px 0 0;
+    width: 100%;
+  }
+
+  .container {
+    background: #fff;
+    padding: 20px;
+    width: 100%;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    text-align: center;
+  }
+
+  .menu-btn {
+    width: 100%;
+    padding: 15px;
+    margin: 10px 0;
+    font-size: 16px;
+    border: none;
+    border-radius: 12px;
+    background: #2196f3;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s all;
+  }
+
+  .menu-btn:hover { background:#1976d2; }
+  .menu-btn:active { transform: scale(1.05); }
+
+  #content {
+    width: 100%;
+    min-height: 100px;
+    margin-top: 15px;
+    padding: 10px;
+    background: rgba(0,0,0,0.05);
+    border-radius: 12px;
+    text-align: center;
+    opacity: 1;
+    transition: opacity 0.4s;
+  }
+
+  .footer { margin-top:20px; font-size:12px; color:#555; }
+
+  .dark-mode { background:#222; color:#fff; }
+  .dark-mode .container { background:#333; color:#fff; }
+  .dark-mode header { background:#555; }
+</style>
+</head>
+<body class="light-mode">
+
+<div id="splash">Aplikasi Android Pertama</div>
+
+<div id="app" class="light-mode">
+  <header>Aplikasi Android Pertama</header>
+
+  <div class="container">
+    <button class="menu-btn" onclick="showPage('menu1')">Menu 1</button>
+    <button class="menu-btn" onclick="showPage('menu2')">Menu 2</button>
+    <button class="menu-btn" onclick="showPage('menu3')">Menu 3</button>
+    <button class="menu-btn" onclick="toggleTheme()">Toggle Dark Mode</button>
+
+    <div id="content">Selamat datang di aplikasi!</div>
+    <div class="footer">Versi 1.0 • © 2026</div>
+  </div>
+</div>
+
+<script>
+  let darkMode = false;
+
+  // SPLASH SCREEN 3 DETIK
+  window.addEventListener('load', ()=>{
+    setTimeout(()=>{
+      document.getElementById('splash').style.opacity = 0;
+      setTimeout(()=>{
+        document.getElementById('splash').style.display = 'none';
+        document.getElementById('app').style.display = 'flex';
+      },500);
+    },3000);
+  });
+
+  // Multi menu
+  function showPage(menu){
+    const content = document.getElementById('content');
+    content.style.opacity = 0;
+    setTimeout(()=>{
+      switch(menu){
+        case 'menu1': content.innerHTML="<h3>Menu 1</h3><p>Ini halaman menu 1</p>"; break;
+        case 'menu2': content.innerHTML="<h3>Menu 2</h3><p>Ini halaman menu 2</p>"; break;
+        case 'menu3': content.innerHTML="<h3>Menu 3</h3><p>Ini halaman menu 3</p>"; break;
+        default: content.innerHTML="Selamat datang di aplikasi!";
+      }
+      content.style.opacity = 1;
+    },300);
+  }
+
+  // Dark mode toggle
+  function toggleTheme(){
+    darkMode = !darkMode;
+    document.body.className = darkMode ? 'dark-mode' : 'light-mode';
+    document.getElementById('app').className = darkMode ? 'dark-mode' : 'light-mode';
+  }
+</script>
+
+</body>
+</html>
